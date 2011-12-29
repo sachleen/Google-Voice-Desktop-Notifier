@@ -210,10 +210,27 @@ var V = function(a, b, c) {
         a.f = 0;
         ka(a);
         if(a.e != "0") {
-            notification = webkitNotifications.createNotification('48.png', a.e + ' New Message(s)!', '');
+            notification = webkitNotifications.createNotification('images/48.png', a.e + ' New Message(s)!', '');
             notification.ondisplay = function() {
-                setTimeout("notification.cancel()", 2000);
+                setTimeout("notification.cancel()", 5000);
             };
+            notification.onclick = function() {
+                var voiceURL = 'https://www.google.com/voice';
+                chrome.windows.getAll({ populate: true }, function (windows) {
+                    for (var w in windows) {
+                        for (var i in windows[w].tabs) {
+                            var tab = windows[w].tabs[i];
+                            if (tab.url.indexOf(voiceURL) >= 0) {
+                                chrome.tabs.update(tab.id, { selected: true });
+                                notification.cancel();
+                                return;
+                            }
+                        }
+                    }
+                    chrome.tabs.create({ url: voiceURL });
+                    notification.cancel();
+                });
+            }
             notification.show();
         }
     }
