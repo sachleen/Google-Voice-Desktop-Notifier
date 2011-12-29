@@ -1,0 +1,13 @@
+{
+   "name": "Google Voice Desktop Notifier",
+   "version": "1.0",
+   "background_page": "background.html",
+   "permissions": ["tabs", "http://*.google.com/", "https://*.google.com/", "notifications" ],
+   "description": "Google Voice Desktop Notifier",
+   "icons": {
+      "128": "128.png",
+      "32": "48.png",
+      "48": "48.png",
+      "64": "48.png"
+   }
+}
