@@ -210,7 +210,10 @@ var V = function(a, b, c) {
         a.f = 0;
         ka(a);
         if(a.e != "0") {
-            notification = webkitNotifications.createNotification('images/48.png', a.e + ' New Message(s)!', '');
+            var message = a.e + ' New Message';
+            if(a.e > 1) message += 's';
+            
+            notification = webkitNotifications.createNotification('images/48.png', message, '');
             notification.ondisplay = function() {
                 setTimeout("notification.cancel()", 5000);
             };
